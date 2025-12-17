@@ -1,7 +1,7 @@
 package com.example.clubmanagement.controller;
 
 import com.example.clubmanagement.dto.UserDTO;
-import com.example.clubmanagement.entity.User;
+import com.example.clubmanagement.model.User;
 import com.example.clubmanagement.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

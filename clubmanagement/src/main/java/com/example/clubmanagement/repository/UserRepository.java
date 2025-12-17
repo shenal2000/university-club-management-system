@@ -1,6 +1,6 @@
 package com.example.clubmanagement.repository;
 
-import com.example.clubmanagement.entity.User;
+import com.example.clubmanagement.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
