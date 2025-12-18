@@ -1,7 +1,7 @@
 package com.example.clubmanagement.service;
 
 import com.example.clubmanagement.dto.UserDTO;
-import com.example.clubmanagement.model.User;
+import com.example.clubmanagement.Model.User;
 import com.example.clubmanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

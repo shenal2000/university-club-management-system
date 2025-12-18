@@ -1,4 +1,4 @@
-package com.example.clubmanagement.model;
+package com.example.clubmanagement.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
