@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43e56803-9fdc-449d-8ca1-f17a9aca5359" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/admin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/announcements.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/clubs.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/events.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/meetings.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/admin-dashboard/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/controller/ClubCategoryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/dto/ClubCategoryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/repository/ClubCategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/service/ClubCategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/entity/ClubCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/service/impl/ClubCategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,16 +24,15 @@
         <option value="Interface" />
         <option value="module-info" />
         <option value="Class" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
   <component name="ProjectId" id="370oH3Aq7x5s9TBYY0VJmsjYytY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -43,7 +40,6 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
