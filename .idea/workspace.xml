@@ -5,13 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43e56803-9fdc-449d-8ca1-f17a9aca5359" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/controller/ClubCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/dto/ClubCategoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/repository/ClubCategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/com/example/clubmanagement/service/ClubCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/entity/ClubCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/java/service/impl/ClubCategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/cat1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/cat2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/cat3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/cat4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/contact page/contact.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/contact page/nsbm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/contact page/university.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/join9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/news1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/news2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/news3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/nsbm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clubmanagement/src/main/resources/templates/home page/university.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/university-club-management-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/university-club-management-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,15 +44,16 @@
         <option value="Interface" />
         <option value="module-info" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="370oH3Aq7x5s9TBYY0VJmsjYytY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,13 +61,38 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ishin/Downloads/university-club-management-system"
+    "last_opened_file_path": "C:/Users/ishin/Downloads/university-club-management-system/clubmanagement/src/main/resources/templates/home page",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ishin\Downloads\university-club-management-system\clubmanagement\src\main\resources\templates\home page" />
+      <recent name="C:\Users\ishin\Downloads\university-club-management-system\clubmanagement\src\main\resources\templates" />
+      <recent name="C:\Users\ishin\Downloads\university-club-management-system\clubmanagement\src\main\resources\ templates" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="clubmanagement" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="clubmanagement" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
