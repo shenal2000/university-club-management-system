@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club management System</title>
+<link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer"/>
+        
+        <style>
+           * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+
+
+            }
+
+        /* Background */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5)
+            ),
+            url("university.jpg"); 
+            background-size: cover;
+            background-position: center;
+            }
+         .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+         .navbar .logo img {
+            height: 50px;
+        }
+
+        .navbar .search-bar {
+            margin-left: 20px;
+        }
+        .navbar .search-bar input[type="text"] {
+            width: 250px;
+            padding: 7px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .navbar .search-bar input[type="text"]:focus {
+             border-color: green;
+        }
+
+        .navbar .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 20px;
+        }
+        .navbar .menu a {
+             text-decoration: none;
+             color: black;
+             font-weight: bold;
+             padding: 5px 10px;
+             transition: 0.3s;
+        }
+        .navbar .menu a:hover {
+             color: green;
+        }
+
+        .navbar .login-btn {
+            padding: 7px 20px;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .navbar .login-btn:hover {
+            background-color: darkgreen;
+        }
+
+       
+        /* Contact Form Container */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+        /* ADDED CLOSE BUTTON STYLE */
+
+       .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+         }
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Make contact-box relative for close button */
+.contact-box {
+    position: relative;
+}
+
+         /* Contact page description text */
+       .contact-desc {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+       }
+
+
+        .contact-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-box input,
+        .contact-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-box textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .contact-box button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-box button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<navbar-section>
+
+<navbar-section>
+<div class="navbar">
+    <div class="logo">
+        <img src="nsbm.png" alt="NSBM Logo">
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+    </div>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="#">Club</a>
+        <a href="#">Events</a>
+        <a href="#">Announcement</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+    </div>
+    <button class="login-btn">Login</button>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+    <!-- Contact Form -->
+    <div class="contact-container">
+       <div class="contact-box">
+       <span class="close-btn" onclick="closeContact()">✖</span>
+            <h2>Contact Us</h2>
+             <p class="contact-desc">
+            Get in touch with us for support or inquiries about the University Club Management System.
+        </p>
+                              
+           <form>
+                <input type="text" placeholder="First Name" required>
+                <input type="text" placeholder="Last Name" required>
+                <input type="text" placeholder=" Your Email " required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>
