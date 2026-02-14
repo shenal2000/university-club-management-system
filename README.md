@@ -2,7 +2,7 @@ NSBM Green University Clubs Management System
 1. Introduction
 
 The NSBM Green University Clubs Management System is a full-stack web application developed using Spring Boot, Spring Security, Thymeleaf, and MySQL. The system is designed to centralize and digitalize the management of university clubs, members, events, meetings, and announcements in a secure and structured environment.
-This project was developed as an academic assignment for NSBM Green University, Homagama, Sri Lanka, under the Software Engineering / Web Application Development module.
+This project was developed as an academic assignment for NSBM Green University, Homagama, Sri Lanka, Development Enterprise Application module.
 
 2. Project Objective
 The main objectives of this system are
