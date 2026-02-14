@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Management System</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+<style>
+    /* =============================================================
+   PROFESSIONAL CLUB UI - FULL STYLESHEET
+   Refined for: Clarity, Hierarchy, and Minimalism
+   ============================================================= */
+
+/* 1. ROOT VARIABLES */
+:root {
+    --bg-page: #f9fafb;
+    --bg-card: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    --border-color: #e5e7eb;
+
+    /* Accents */
+    --accent-event: #6366f1;       /* Indigo */
+    --accent-meeting: #10b981;     /* Emerald */
+    --accent-announcement: #f43f5e; /* Rose */
+
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --shadow-subtle: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+/* 2. GLOBAL RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding-bottom: 100px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 3. HERO BANNER */
+.club-banner {
+    position: relative;
+    height: 340px;
+    max-width: 1200px;
+    margin: 30px auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: #111827;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+.club-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.club-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 40px;
+}
+
+#clubName {
+    font-size: 40px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+}
+
+.president-text {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.role-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 4. CONTENT SECTIONS */
+.club-description-section, .club-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 25px;
+}
+
+h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+h2::after {
+    content: "";
+    height: 1px;
+    background: var(--border-color);
+    flex-grow: 1;
+}
+
+#clubDescription {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 850px;
+    line-height: 1.8;
+}
+
+/* 5. PROFESSIONAL CARD SYSTEM */
+.event-card, .meeting-card, .announcement-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow-subtle);
+}
+
+.event-card:hover, .meeting-card:hover, .announcement-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: #d1d5db;
+}
+
+/* Header strip markers */
+.event-card { border-top: 4px solid var(--accent-event); }
+.meeting-card { border-top: 4px solid var(--accent-meeting); }
+.announcement-card { border-top: 4px solid var(--accent-announcement); }
+
+.event-card h4, .meeting-card h4, .announcement-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.event-card p, .announcement-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* Meta Pills */
+.event-meta, .meeting-meta, .announcement-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.event-meta span, .meeting-meta span, .announcement-meta span {
+    background: #f3f4f6;
+    color: var(--text-secondary);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Specific Pill Colors for Announcements */
+.announcement-meta span {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+/* 6. BUTTONS */
+button {
+    background: #111827;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #374151;
+    transform: translateY(-1px);
+}
+
+/* 7. GRID LAYOUT */
+#eventsList, #meetingsList, #announcementsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+/* Empty State Styling */
+.no-data {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+/* 8. RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .club-banner {
+        height: 280px;
+        margin: 0;
+        border-radius: 0;
+    }
+    #clubName { font-size: 30px; }
+    .club-banner-overlay { padding: 25px; }
+
+    #eventsList, #meetingsList, #announcementsList {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<navbar-section>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nsbm.png" alt="NSBM Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="club.html">Club</a>
+            <a href="events.html">Events</a>
+            <a href="announcement.html">Announcement</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div style="position: relative;">
+            <button id="loginBtn" class="login-btn">Login</button>
+            <div id="logoutMenu">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="club.html">Club</a>
+        <a href="events.html">Events</a>
+        <a href="announcement.html">Announcement</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+</navbar-section>
+
+<!-- CLUB BANNER -->
+<section class="club-banner">
+    <img id="clubLogo" alt="Club Banner">
+    <div class="club-banner-overlay">
+        <div class="club-banner-content">
+            <h1 id="clubName">Loading...</h1>
+            <p class="president-text">President: <span id="presidentName">---</span></p>
+        </div>
+        <div class="role-container">
+            <span class="role-badge" id="userRole"></span>
+        </div>
+    </div>
+</section>
+
+<!-- CLUB DESCRIPTION -->
+<section class="club-description-section">
+    <h2>About This Club</h2>
+    <p id="clubDescription"></p>
+</section>
+
+<!-- EVENTS SECTION -->
+<section id="eventsSection" class="club-section">
+    <h2>Events</h2>
+    <div id="eventsActions"></div> <br>
+    <div id="eventsList"></div>
+</section>
+
+<!-- MEETINGS SECTION -->
+<section id="meetingsSection" class="club-section">
+    <h2>Meetings</h2>
+    <div id="meetingsActions"></div> <br>
+    <div id="meetingsList"></div>
+</section>
+
+<!-- ANNOUNCEMENTS SECTION -->
+<section id="announcementsSection" class="club-section">
+    <h2>Announcements</h2>
+    <div id="announcementsActions"></div> <br>
+    <div id="announcementsList"></div>
+</section>
+
+<script>
+    /* ================= URL & LOGIN ================= */
+    const urlParams = new URLSearchParams(window.location.search);
+    const clubId = urlParams.get('id');
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!loggedUser || !loggedUser.userId) {
+        alert("Please log in to view club details.");
+        window.location.href = "../login/login.html";
+    }
+
+    const userId = loggedUser.userId;
+    let userRole = "MEMBER";
+    let canManage = false;
+
+    /* ================= LOAD CLUB DETAILS + ROLE ================= */
+    fetch(`http://localhost:8080/club-members/club/${clubId}/details?userId=${userId}`)
+        .then(res => res.json())
+        .then(data => {
+
+            console.log("Club Details Response:", data); // DEBUG
+
+            /* BASIC INFO */
+            document.getElementById("clubName").textContent = data.clubName;
+            document.getElementById("clubDescription").textContent = data.clubDescription;
+            document.getElementById("clubLogo").src =
+                `http://localhost/club-logos/${data.clubLogo}`;
+
+            /* ROLE */
+            userRole = data.role || "MEMBER";
+            document.getElementById("userRole").textContent = userRole;
+
+            /* PERMISSIONS */
+            canManage = (userRole === "PRESIDENT" || userRole === "STAFF");
+
+            /* EVENTS */
+            loadClubEvents();
+            document.getElementById("eventsActions").innerHTML = canManage
+                ? `<button onclick="location.href='events-dashboard.html?id=${clubId}'">
+                        Manage Events
+                   </button>`
+                : "";
+
+            /* MEETINGS */
+            loadClubMeetings();
+            document.getElementById("meetingsActions").innerHTML = canManage
+                ? `<button onclick="location.href='meetings-dashboard.html?id=${clubId}'">
+                        Manage Meetings
+                   </button>`
+                : "";
+
+            /* ANNOUNCEMENTS */
+            loadClubAnnouncements();
+            document.getElementById("announcementsActions").innerHTML = canManage
+                ? `<button onclick="location.href='announcements-dashboard.html?id=${clubId}'">
+                        Manage Announcements
+                   </button>`
+                : "";
+        })
+        .catch(err => {
+            console.error("Failed to load club details:", err);
+            alert("Failed to load club details");
+        });
+
+    /* ================= EVENTS ================= */
+    function loadClubEvents() {
+        fetch(`http://localhost:8080/api/events/club/${clubId}`)
+            .then(res => res.json())
+            .then(events => {
+                const list = document.getElementById("eventsList");
+                list.innerHTML = "";
+
+                if (!events || events.length === 0) {
+                    list.innerHTML = "<p class='no-data'>No events available.</p>";
+                    return;
+                }
+
+                events.forEach(e => {
+                    list.innerHTML += `
+                        <div class="event-card">
+                            <h4>${e.eventTitle}</h4>
+                            <p>${e.eventDescription}</p>
+                            <div class="event-meta">
+                                <span><i class="fa-solid fa-calendar-days"></i> ${e.eventDate}</span>
+                                <span><i class="fa-solid fa-clock"></i> ${e.eventTime}</span>
+                                <span><i class="fa-solid fa-location-dot"></i> ${e.eventLocation}</span>
+                            </div>
+                        </div>`;
+                });
+            });
+    }
+
+    /* ================= MEETINGS ================= */
+    function loadClubMeetings() {
+        fetch(`http://localhost:8080/api/meeting/club/${clubId}`)
+            .then(res => res.json())
+            .then(meetings => {
+                const list = document.getElementById("meetingsList");
+                list.innerHTML = "";
+
+                if (!meetings || meetings.length === 0) {
+                    list.innerHTML = "<p class='no-data'>No meetings available.</p>";
+                    return;
+                }
+
+                meetings.forEach(m => {
+                    list.innerHTML += `
+                        <div class="meeting-card">
+                            <h4>${m.meetingTitle}</h4>
+                            <div class="meeting-meta">
+                                <span><i class="fa-solid fa-calendar-days"></i> ${m.meetingDate}</span>
+                                <span><i class="fa-solid fa-clock"></i> ${m.meetingTime}</span>
+                            </div>
+                        </div>`;
+                });
+            });
+    }
+
+    /* ================= ANNOUNCEMENTS ================= */
+    function loadClubAnnouncements() {
+        fetch(`http://localhost:8080/api/announcements/club/${clubId}`)
+            .then(res => res.json())
+            .then(listData => {
+                const list = document.getElementById("announcementsList");
+                list.innerHTML = "";
+
+                if (!listData || listData.length === 0) {
+                    list.innerHTML = "<p class='no-data'>No announcements available.</p>";
+                    return;
+                }
+
+                listData.forEach(a => {
+                    list.innerHTML += `
+                        <div class="announcement-card">
+                            <h4>${a.announcementTitle}</h4>
+                            <p>${a.announcementDescription || "No details provided."}</p>
+                            <div class="announcement-meta">
+                                ${a.announcementDate ? `<span><i class="fa-solid fa-calendar-days"></i> ${a.announcementDate}</span>` : ""}
+                                ${a.announcementTime ? `<span><i class="fa-solid fa-clock"></i> ${a.announcementTime}</span>` : ""}
+                            </div>
+                        </div>`;
+                });
+            });
+    }
+</script>
+
+
+
+
+
+<script src="script.js"></script>
+<footer class="nsbm-footer">
+    <div class="footer-content">
+
+        <div class="footer-column branding-column">
+            <h3>NSBM Club Management System</h3>
+            <p>Empowering students at NSBM Green University <br>through clubs, learning, and <br>leadership opportunities.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column links-column">
+            <h3>Featured Links</h3>
+            <ul>
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Clubs</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-column">
+            <h3>Contact & Resources</h3>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="#">clubmanagement@nsbm.ac.lk</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+94 11 544 5000</span>
+            </div>
+            <ul>
+                <li><a href="https://www.nsbm.ac.lk/">NSBM Main Website</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; NSBM Club management System All Right Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

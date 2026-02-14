@@ -1,47 +1,52 @@
 package com.example.clubmanagement.service;
 
-import com.example.clubmanagement.dto.EventDTO;
-import com.example.clubmanagement.Model.Event;
+import com.example.clubmanagement.model.Club;
+import com.example.clubmanagement.model.Event;
+import com.example.clubmanagement.repository.ClubRepository;
 import com.example.clubmanagement.repository.EventRepository;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
 public class EventService {
 
-    private final EventRepository eventRepository;
+    private final EventRepository eventRepo;
+    private final ClubRepository clubRepo;
 
-    public EventService(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public EventService(EventRepository eventRepo, ClubRepository clubRepo) {
+        this.eventRepo = eventRepo;
+        this.clubRepo = clubRepo;
     }
 
-    public Event createEvent(EventDTO dto) {
-        Event event = new Event();
-        event.setClubId(dto.getClubId());
-        event.setEventTitle(dto.getEventTitle());
-        event.setEventDescription(dto.getEventDescription());
-        event.setEventDate(dto.getEventDate());
-        event.setEventTime(dto.getEventTime());
-        event.setLocation(dto.getLocation());
-
-        return eventRepository.save(event);
+    public List<Event> getActiveEvents(Long clubId) {
+        return eventRepo.findByClub_ClubIdAndActiveTrue(clubId);
     }
 
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    @Transactional
+    public Event createEvent(Long clubId, Event event) {
+        Club club = clubRepo.findById(clubId)
+                .orElseThrow(() -> new RuntimeException("Club not found"));
+        event.setClub(club);
+        return eventRepo.save(event);
     }
 
-    public List<Event> getEventsByClubId(Long clubId) {
-        return eventRepository.findByClubId(clubId);
-    }
-
-    public Event getEventById(Long eventId) {
-        return eventRepository.findById(eventId)
+    @Transactional
+    public Event updateEvent(Long eventId, Event updated) {
+        Event event = eventRepo.findById(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
+
+        event.setEventTitle(updated.getEventTitle());
+        event.setEventDescription(updated.getEventDescription());
+        event.setEventDate(updated.getEventDate());
+        event.setEventTime(updated.getEventTime());
+        event.setEventLocation(updated.getEventLocation());
+
+        return eventRepo.save(event);
     }
 
+    @Transactional
     public void deleteEvent(Long eventId) {
-        eventRepository.deleteById(eventId);
+        eventRepo.deleteById(eventId);
     }
 }

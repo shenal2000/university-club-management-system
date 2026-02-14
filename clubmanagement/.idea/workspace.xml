@@ -5,11 +5,90 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0953bc7-f20f-49b4-ba4e-2990f46b5737" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/Model/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/EventController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/EventDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/EventRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/ClubmanagementApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/ClubmanagementApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/Model/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/Model/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/Model/club.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/Model/club.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/ClubCategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/EventController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/RoleGlobalController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/clubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/controller/ClubController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/ClubCategoryDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/EventDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/EventDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/RoleGlobalDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/clubdto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/dto/ClubDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/model/Role_global.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/ClubCategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/EventRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/RoleGlobalRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/clubRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/repository/ClubRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/ClubCategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/RoleGlobalService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/clubService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/ClubService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/clubmanagement/service/impl/RoleGlobalServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/ClubCategory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/impl/ClubCategoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/admin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/announcements.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/clubs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/events.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/meetings.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/admin-dashboard/user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/cat1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/cat2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/cat3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/cat4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/contact page/contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/contact page/nsbm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/contact page/university.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/join9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/news1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/news2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/news3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/nsbm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home page/university.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/ClubmanagementApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/ClubmanagementApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/Model/club.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/Model/club.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/controller/RoleGlobalController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/controller/clubController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/controller/clubController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/dto/RoleGlobalDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/dto/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/dto/UserDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/dto/clubdto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/dto/clubdto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/model/Role_global.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/repository/RoleGlobalRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/repository/clubRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/repository/clubRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/RoleGlobalService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/clubService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/clubService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/clubmanagement/service/impl/RoleGlobalServiceImpl.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +98,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -26,12 +106,47 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "main"
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="3767R91mlbqEPIfANEyDS729orJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ClubmanagementApplication.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/Desktop/clubmanagement&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.clubmanagement.service" />
+      <recent name="com.example.clubmanagement.config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\clubmanagement\src\main\resources\static\userdashboard" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\clubmanagement\src\main\resources\static\login" />
+      <recent name="C:\Users\user\Desktop\clubmanagement\src\main\resources\static\userdashboard" />
+    </key>
+  </component>
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0953bc7-f20f-49b4-ba4e-2990f46b5737" name="Changes" comment="" />
+      <created>1766211655665</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1766211655665</updated>
+    </task>
     <servers />
   </component>
 </project>

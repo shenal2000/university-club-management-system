@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club management System</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .faq-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .faq-title {
+            text-align: center;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .faq-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .faq-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            padding: 18px 20px;
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question:hover {
+            background-color: #f5f5f5;
+        }
+        .faq-question .icon {
+            font-size: 20px;
+            color: #2e7d32;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+        .faq-answer p {
+            padding: 15px 0 20px 0;
+            color: #444;
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-question {
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+<navbar-section>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nsbm.png" alt="NSBM Logo">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="club.html">Club</a>
+            <a href="events.html">Events</a>
+            <a href="announcement.html">Announcement</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div style="position: relative;">
+            <button id="loginBtn" class="login-btn">Login</button>
+            <div id="logoutMenu">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="club.html">Club</a>
+        <a href="events.html">Events</a>
+        <a href="announcement.html">Announcement</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+
+</navbar-section>
+
+<div class="faq-container">
+    <h1 class="faq-title">Frequently Asked Questions</h1> <br><hr><br>
+    <div class="faq-item">
+        <button class="faq-question">
+            What is the Club Management System?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                The Club Management System is a digital platform that helps manage student clubs,
+                memberships, events, announcements, and communication efficiently.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            Who can use the Club Management System?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                Students, club leaders, and administrators of the university can use the system
+                based on their assigned roles.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            How do I join a club?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                After logging in, go to the Clubs section, select your preferred club,
+                and click the “Join Club” button. Approval may be required by the club admin.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            Can I join more than one club?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                Yes, students are allowed to join multiple clubs unless restricted by university policies.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            How can I see upcoming club events?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                Upcoming events are displayed in the Events section on the dashboard
+                after you log in.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            Who can create events and announcements?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                Only authorized club leaders and administrators can create or manage
+                events and announcements.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">
+            What should I do if I forget my password?
+            <span class="icon">+</span>
+        </button>
+        <div class="faq-answer">
+            <p>
+                Click on the “Forgot Password” option on the login page and follow the instructions
+                to reset your password.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll(".faq-question").forEach(button => {
+        button.addEventListener("click", () => {
+            const faqItem = button.parentElement;
+            const answer = faqItem.querySelector(".faq-answer");
+            const icon = button.querySelector(".icon");
+
+            const isOpen = faqItem.classList.contains("active");
+
+            document.querySelectorAll(".faq-item").forEach(item => {
+                item.classList.remove("active");
+                item.querySelector(".faq-answer").style.maxHeight = null;
+                item.querySelector(".icon").textContent = "+";
+            });
+
+            if (!isOpen) {
+                faqItem.classList.add("active");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                icon.textContent = "−";
+            }
+        });
+    });
+</script>
+
+
+
+
+<script src="script.js"></script>
+<footer class="nsbm-footer">
+    <div class="footer-content">
+
+        <div class="footer-column branding-column">
+            <h3>NSBM Club Management System</h3>
+            <p>Empowering students at NSBM Green University <br>through clubs, learning, and <br>leadership opportunities.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column links-column">
+            <h3>Featured Links</h3>
+            <ul>
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Clubs</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-column">
+            <h3>Contact & Resources</h3>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="#">clubmanagement@nsbm.ac.lk</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+94 11 544 5000</span>
+            </div>
+            <ul>
+                <li><a href="https://www.nsbm.ac.lk/">NSBM Main Website</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; NSBM Club management System All Right Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

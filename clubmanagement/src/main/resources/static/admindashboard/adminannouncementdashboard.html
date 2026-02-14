@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Announcement Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a2d9b7f5c3.js" crossorigin="anonymous"></script>
+
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',sans-serif;background:#f5f6fa;}
+        .container{display:flex;height:100vh;}
+
+        /* SIDEBAR */
+        .sidebar {
+    width: 230px;
+    background: #0f172a;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Push logout to bottom */
+.logout-btn {
+    margin-top: auto;
+    background: #dc2626;
+    color: white !important;
+}
+
+.logout-btn:hover {
+    background: #b91c1c !important;
+}
+
+
+        /* MAIN */
+        .main{flex:1;padding:28px;overflow-y:auto;}
+        h1{font-size:22px;font-weight:600;margin-bottom:24px;color:#111827;}
+        .top-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:30px;}
+        .card{
+            background:#fff;border-radius:12px;padding:22px;
+            box-shadow:0 6px 18px rgba(0,0,0,.06);
+            display:flex;
+            flex-direction:column;
+        }
+        .card h2{
+            font-size:15px;font-weight:600;margin-bottom:14px;
+            border-bottom:1px solid #e5e7eb;padding-bottom:8px;
+        }
+
+        label{font-size:12px;font-weight:500;margin-bottom:4px;display:block;}
+        input,textarea,select{
+            width:100%;padding:9px 10px;border-radius:6px;border:1px solid #d1d5db;margin-bottom:12px;font-size:13px;
+        }
+        input:focus,textarea:focus,select:focus{outline:none;border-color:#2563eb;}
+
+        .btn{
+            padding:8px 14px;font-size:13px;border-radius:6px;border:none;cursor:pointer;font-weight:500;
+        }
+        .btn-primary{background:#2563eb;color:#fff;margin-top:8px;}
+        .btn-primary:hover{background:#1e40af}
+        .btn-danger{background:#dc2626;color:#fff}
+        .btn-danger:hover{background:#b91c1c}
+        .btn-edit{background:#22c55e;color:#fff;}
+        .btn-edit:hover{background:#16a34a;}
+
+        .list-card{
+            background:#fff;border-radius:12px;padding:22px;
+            box-shadow:0 6px 18px rgba(0,0,0,.06);
+        }
+
+        table{width:100%;border-collapse:collapse;}
+        th{background:#f9fafb;font-size:12px;padding:10px;text-align:left;}
+        td{font-size:13px;padding:10px;border-bottom:1px solid #eef2f7;}
+        .actions{white-space:nowrap;}
+        .actions button{margin-right:6px;}
+
+        /* EDIT MODAL */
+        #editModal{
+            display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+            background:rgba(0,0,0,.4);justify-content:center;align-items:center;
+        }
+        #editModal div{
+            background:#fff;padding:24px;border-radius:12px;width:420px;
+            display:flex;flex-direction:column;
+        }
+        #editModal h2{margin-bottom:14px;}
+        #editModal label{margin-top:8px;}
+        #editModal .modal-buttons{
+            display:flex;
+            justify-content:flex-end;
+            margin-top:16px;
+            gap:8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>Admin</h2>
+
+        <a href="admindashboard.html">
+            <i class="fa-solid fa-chart-pie"></i> Dashboard
+        </a>
+
+        <a href="adminclubdashboard.html">
+            <i class="fa-solid fa-building"></i> Clubs
+        </a>
+
+        <a href="adminuserdashboard.html">
+            <i class="fa-solid fa-user"></i> Users
+        </a>
+
+        <a href="admineventdashboard.html">
+            <i class="fa-solid fa-calendar-days"></i> Events
+        </a>
+
+        <a href="adminannouncementdashboard.html">
+            <i class="fa-solid fa-bullhorn"></i> Announcements
+        </a>
+
+        <a href="adminmemberdashboard.html">
+            <i class="fa-solid fa-users"></i> Members
+        </a>
+
+        <!-- Logout -->
+        <a href="#" class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+
+    <!-- MAIN -->
+    <div class="main">
+        <h1>Announcement Management</h1>
+
+        <div class="top-grid">
+            <!-- MAIN ANNOUNCEMENTS -->
+            <div class="card">
+                <h2>Main Announcements (Global)</h2>
+                <label>Title</label>
+                <input id="mainTitle">
+                <label>Description</label>
+                <textarea id="mainDesc"></textarea>
+                <button class="btn btn-primary" onclick="saveMainAnnouncement()">Save Main Announcement</button>
+            </div>
+
+            <!-- CLUB ANNOUNCEMENTS -->
+            <div class="card">
+                <h2>Club Announcements</h2>
+                <label>Select Club</label>
+                <select id="clubSelect"></select>
+                <label>Title</label>
+                <input id="clubTitle">
+                <label>Description</label>
+                <textarea id="clubDesc"></textarea>
+                <button class="btn btn-primary" onclick="saveClubAnnouncement()">Save Club Announcement</button>
+            </div>
+        </div>
+
+        <!-- ANNOUNCEMENTS LIST -->
+        <div class="list-card">
+            <h2>All Announcements</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Club</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="announcementsBody">
+                <tr><td colspan="4">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="editModal">
+    <div>
+        <h2>Edit Announcement</h2>
+        <input type="hidden" id="editAnnouncementId">
+        <input type="hidden" id="editClubId">
+        <label>Title</label><input id="editTitle">
+        <label>Description</label><textarea id="editDesc"></textarea>
+        <div class="modal-buttons">
+            <button class="btn btn-danger" onclick="closeEdit()">Cancel</button>
+            <button class="btn btn-primary" onclick="updateAnnouncement()">Update</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const BASE_URL = "http://localhost:8080";
+    let clubsCache = [];
+    let allAnnouncements = [];
+
+    async function loadClubs(){
+        const res = await fetch(`${BASE_URL}/clubs`);
+        clubsCache = await res.json();
+        const sel = document.getElementById("clubSelect");
+        sel.innerHTML = "";
+        clubsCache.forEach(c=> sel.innerHTML += `<option value="${c.clubId}">${c.clubName}</option>`);
+    }
+
+    async function loadAnnouncements(){
+        allAnnouncements = [];
+
+        // MAIN ANNOUNCEMENTS (clubId=null)
+        try{
+            const res = await fetch(`${BASE_URL}/api/announcements/club/null`);
+            const data = await res.json();
+            data.forEach(a => allAnnouncements.push({...a, clubName:"Main Announcement"}));
+        }catch{}
+
+        // CLUB ANNOUNCEMENTS
+        for(const c of clubsCache){
+            try{
+                const res = await fetch(`${BASE_URL}/api/announcements/club/${c.clubId}`);
+                const data = await res.json();
+                data.forEach(a => allAnnouncements.push({...a, clubName:c.clubName}));
+            }catch{}
+        }
+
+        renderAnnouncements();
+    }
+
+    function renderAnnouncements(){
+        const body = document.getElementById("announcementsBody");
+        body.innerHTML = "";
+        if(!allAnnouncements.length){
+            body.innerHTML = `<tr><td colspan="4">No announcements</td></tr>`;
+            return;
+        }
+        allAnnouncements.forEach(a=>{
+            body.innerHTML += `
+            <tr>
+                <td>${a.announcementTitle}</td>
+                <td>${a.clubName}</td>
+                <td>${a.announcementDescription}</td>
+                <td class="actions">
+                    <button class="btn btn-edit" onclick="editAnnouncement(${a.announcementId}, '${a.clubName==='Main Announcement'?null:a.club.clubId}')">Edit</button>
+                    <button class="btn btn-danger" onclick="deleteAnnouncement(${a.announcementId})">Delete</button>
+                </td>
+            </tr>`;
+        });
+    }
+
+    function saveMainAnnouncement(){
+        fetch(`${BASE_URL}/api/announcements/club/null`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                announcementTitle: mainTitle.value,
+                announcementDescription: mainDesc.value
+            })
+        }).then(()=>loadAnnouncements());
+    }
+
+    function saveClubAnnouncement(){
+        const clubId = clubSelect.value;
+        fetch(`${BASE_URL}/api/announcements/club/${clubId}`,{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                announcementTitle: clubTitle.value,
+                announcementDescription: clubDesc.value
+            })
+        }).then(()=>loadAnnouncements());
+    }
+
+    function deleteAnnouncement(id){
+        fetch(`${BASE_URL}/api/announcements/${id}`,{method:"DELETE"}).then(()=>loadAnnouncements());
+    }
+
+    function editAnnouncement(id, clubId){
+        const a = allAnnouncements.find(x=>x.announcementId===id);
+        if(!a) return;
+        editAnnouncementId.value = a.announcementId;
+        editClubId.value = clubId;
+        editTitle.value = a.announcementTitle;
+        editDesc.value = a.announcementDescription;
+        document.getElementById("editModal").style.display = "flex";
+    }
+
+    function closeEdit(){document.getElementById("editModal").style.display = "none";}
+
+    function updateAnnouncement(){
+        const id = editAnnouncementId.value;
+        fetch(`${BASE_URL}/api/announcements/${id}`,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                announcementTitle: editTitle.value,
+                announcementDescription: editDesc.value
+            })
+        }).then(()=>{closeEdit(); loadAnnouncements();});
+    }
+
+    document.addEventListener("DOMContentLoaded", async ()=>{
+        await loadClubs();
+        await loadAnnouncements();
+    });
+
+    // Auto highlight active page
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".sidebar a");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    links.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+});
+
+// Logout function
+function logout() {
+    // Clear login data
+    localStorage.removeItem("loggedUser");
+    sessionStorage.clear();
+
+    // Redirect to login page
+    window.location.href = "../login/login.html";
+}
+
+</script>
+
+</body>
+</html>

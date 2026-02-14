@@ -1,32 +1,27 @@
-package com.example.clubmanagement.Model;
-
+package com.example.clubmanagement.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "club")
-public class club {
+@Table(name = "clubs")
+public class Club {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "club_id")
     private Long clubId;
 
-    @Column(name = "club_name")
+    @Column(nullable = false, unique = true)
     private String clubName;
 
-    @Column(name = "description")
-    private String description;
+    @Column(length = 1000)
+    private String clubDescription;
 
-    @Column(name = "clubcategory_id")
-    private Long clubCategoryId;
-
-    @Column(name = "club_logo")
     private String clubLogo;
 
-    // Constructors
-    public club() {}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ClubCategory clubCategory;
 
-    // Getters and Setters
+    // Getters & Setters
     public Long getClubId() {
         return clubId;
     }
@@ -43,20 +38,12 @@ public class club {
         this.clubName = clubName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getClubDescription() {
+        return clubDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getClubCategoryId() {
-        return clubCategoryId;
-    }
-
-    public void setClubCategoryId(Long clubCategoryId) {
-        this.clubCategoryId = clubCategoryId;
+    public void setClubDescription(String clubDescription) {
+        this.clubDescription = clubDescription;
     }
 
     public String getClubLogo() {
@@ -66,4 +53,13 @@ public class club {
     public void setClubLogo(String clubLogo) {
         this.clubLogo = clubLogo;
     }
+
+    public ClubCategory getClubCategory() {
+        return clubCategory;
+    }
+
+    public void setClubCategory(ClubCategory clubCategory) {
+        this.clubCategory = clubCategory;
+    }
+
 }

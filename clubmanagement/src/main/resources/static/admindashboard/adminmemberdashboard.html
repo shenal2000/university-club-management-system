@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Club Members</title>
+
+    <style>
+        body{font-family:Inter,Arial;background:#f5f6fa;margin:0}
+        .container{display:flex;height:100vh}
+
+
+        /* Sidebar */
+        .sidebar {
+    width: 230px;
+    background: #0f172a;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Push logout to bottom */
+.logout-btn {
+    margin-top: auto;
+    background: #dc2626;
+    color: white !important;
+}
+
+.logout-btn:hover {
+    background: #b91c1c !important;
+}
+
+
+
+        /* Main */
+        .main{flex:1;padding:25px;overflow:auto}
+        .hidden{display:none}
+
+        /* Tables */
+        table{width:100%;background:#fff;border-collapse:collapse;margin-bottom:25px}
+        th,td{padding:10px;border-bottom:1px solid #e5e7eb;font-size:14px}
+        th{background:#f9fafb;text-align:left}
+
+        /* Buttons */
+        button{cursor:pointer}
+        button.view{background:#2563eb;color:#fff;border:none;padding:6px 10px;border-radius:6px}
+        button.add{background:#22c55e;color:#fff;border:none;padding:6px 10px;border-radius:6px}
+        button.edit{background:#0ea5e9;color:#fff;border:none;padding:5px 8px;border-radius:6px}
+        button.del{background:#ef4444;color:#fff;border:none;padding:5px 8px;border-radius:6px}
+        button.back{background:#64748b;color:#fff;border:none;padding:6px 10px;border-radius:6px}
+
+        /* Search bars */
+        input.search{padding:6px;width:200px;margin-bottom:10px;border-radius:6px;border:1px solid #cbd5e1}
+
+        /* Modal */
+        .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:999}
+        .box{background:#fff;padding:25px;width:450px;border-radius:12px}
+        .box input,.box select{width:100%;padding:10px;margin:6px 0;border-radius:6px;border:1px solid #cbd5e1;font-size:14px}
+        .box input[readonly]{background:#f1f5f9}
+        .box label{font-weight:600;margin-top:8px;display:block;color:#111}
+        .row{display:flex;justify-content:space-between;margin-top:10px}
+        .row button{flex:1;margin-right:10px;padding:10px;border:none;border-radius:8px;color:#fff;font-weight:600;transition:0.3s}
+        .row button:last-child{margin-right:0}
+        .row button.save{background:#2563eb}
+        .row button.save:hover{background:#1d4ed8}
+        .row button.cancel{background:#64748b}
+        .row button.cancel:hover{background:#475569}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Admin</h2>
+
+        <a href="admindashboard.html">
+            <i class="fa-solid fa-chart-pie"></i> Dashboard
+        </a>
+
+        <a href="adminclubdashboard.html">
+            <i class="fa-solid fa-building"></i> Clubs
+        </a>
+
+        <a href="adminuserdashboard.html">
+            <i class="fa-solid fa-user"></i> Users
+        </a>
+
+        <a href="admineventdashboard.html">
+            <i class="fa-solid fa-calendar-days"></i> Events
+        </a>
+
+        <a href="adminannouncementdashboard.html">
+            <i class="fa-solid fa-bullhorn"></i> Announcements
+        </a>
+
+        <a href="adminmemberdashboard.html">
+            <i class="fa-solid fa-users"></i> Members
+        </a>
+
+        <!-- Logout -->
+        <a href="#" class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <h2>Club Members Management</h2>
+
+        <!-- CLUB LIST -->
+        <div id="clubList">
+            <h3>All Clubs</h3>
+            <input type="text" class="search" placeholder="Search clubs by name or ID" onkeyup="searchClubs()">
+            <table id="clubTable"></table>
+        </div>
+
+        <!-- GLOBAL TABLES -->
+        <div id="globalTables">
+            <h3>All Clubs Presidents <button class="add" onclick="openAddPresident()">Add President</button></h3>
+            <input type="text" class="search" placeholder="Search presidents by name, ID, or club" onkeyup="searchGlobal('president')">
+            <table id="allPresidentTable"></table>
+
+            <h3>All Clubs Staff <button class="add" onclick="openAddStaff()">Add Staff</button></h3>
+            <input type="text" class="search" placeholder="Search staff by name, ID, or club" onkeyup="searchGlobal('staff')">
+            <table id="allStaffTable"></table>
+        </div>
+
+        <!-- CLUB VIEW -->
+        <div id="clubSection" class="hidden">
+            <button class="back" onclick="backToClubs()">⬅ Back to Clubs</button>
+            <h3 id="clubTitle"></h3>
+
+            <h4>Presidents</h4>
+            <table id="presidentTable"></table>
+
+            <h4>Staff</h4>
+            <table id="staffTable"></table>
+
+            <h4>Members</h4>
+            <table id="memberTable"></table>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL FORM -->
+<div class="modal" id="modal">
+    <div class="box">
+        <h3 id="formTitle">Add Member</h3>
+
+        <input type="hidden" id="id">
+
+        <label>Club</label>
+        <select id="clubIdSelect"></select>
+
+        <label>User</label>
+        <input type="text" id="userSearchInput" placeholder="Search user by name or ID">
+        <select id="userIdSelect">
+            <option value="">-- Select User --</option>
+        </select>
+
+        <div id="roleContainer">
+            <label>Role</label>
+            <select id="role">
+                <option value="PRESIDENT">PRESIDENT</option>
+                <option value="STAFF">STAFF</option>
+                <option value="MEMBER">MEMBER</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <button class="save" onclick="save()">Save</button>
+            <button class="cancel" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API = "http://localhost:8080/users";
+    let users = [];
+    let editMode = false;
+
+    // ================= LOAD USERS =================
+    function load() {
+        fetch(API, {
+            credentials: "include"   // important for Spring Security session
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to load users: " + res.status);
+            return res.json();
+        })
+        .then(data => {
+            users = data;
+            draw(users);
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error loading users. Check console.");
+        });
+    }
+
+    // ================= DRAW TABLE =================
+    function draw(data) {
+        const table = document.getElementById("table");
+        table.innerHTML = "";
+
+        data.forEach(u => {
+            table.innerHTML += `
+            <tr>
+                <td>${u.userId}</td>
+                <td>${u.username}</td>
+                <td>${u.fullName}</td>
+                <td>${u.email}</td>
+                <td>${u.phone || ""}</td>
+                <td>${u.age || ""}</td>
+                <td>${u.faculty || ""}</td>
+                <td>${u.batch || ""}</td>
+                <td>${u.degree || ""}</td>
+                <td>${u.roleGlobal}</td>
+                <td>
+                    <button class="edit" onclick="editUser(${u.userId})">Edit</button>
+                    <button class="del" onclick="deleteUser(${u.userId})">Delete</button>
+                </td>
+            </tr>`;
+        });
+    }
+
+    // ================= SEARCH =================
+    function searchUser() {
+        let q = document.getElementById("search").value.toLowerCase();
+
+        draw(users.filter(u =>
+            u.userId.toString().includes(q) ||
+            u.username.toLowerCase().includes(q) ||
+            u.fullName.toLowerCase().includes(q)
+        ));
+    }
+
+    // ================= OPEN ADD MODAL =================
+    function openAdd() {
+        editMode = false;
+        document.getElementById("title").innerText = "Add User";
+        document.getElementById("modal").style.display = "flex";
+
+        clearForm();
+    }
+
+    // ================= EDIT USER =================
+    function editUser(id) {
+        fetch(`${API}/${id}`, { credentials: "include" })
+        .then(res => res.json())
+        .then(u => {
+            editMode = true;
+            document.getElementById("title").innerText = "Edit User";
+            document.getElementById("modal").style.display = "flex";
+
+            document.getElementById("id").value = u.userId;
+            document.getElementById("username").value = u.username;
+            document.getElementById("fullname").value = u.fullName;
+            document.getElementById("email").value = u.email;
+            document.getElementById("password").value = "";
+            document.getElementById("phone").value = u.phone || "";
+            document.getElementById("age").value = u.age || "";
+            document.getElementById("faculty").value = u.faculty || "";
+            document.getElementById("batch").value = u.batch || "";
+            document.getElementById("degree").value = u.degree || "";
+            document.getElementById("role").value = u.roleGlobal;
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error loading user.");
+        });
+    }
+
+    // ================= SAVE USER =================
+    function save() {
+        let data = {
+            username: document.getElementById("username").value,
+            fullName: document.getElementById("fullname").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            phone: document.getElementById("phone").value,
+            age: document.getElementById("age").value,
+            faculty: document.getElementById("faculty").value,
+            batch: document.getElementById("batch").value,
+            degree: document.getElementById("degree").value,
+            roleGlobal: document.getElementById("role").value
+        };
+
+        let method = editMode ? "PUT" : "POST";
+        let url = editMode
+            ? `${API}/${document.getElementById("id").value}`
+            : API;
+
+        fetch(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Save failed: " + res.status);
+            return res.json();
+        })
+        .then(() => {
+            closeModal();
+            load();
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error saving user. Check console.");
+        });
+    }
+
+    // ================= DELETE USER =================
+    function deleteUser(id) {
+        if (!confirm("Delete user?")) return;
+
+        fetch(`${API}/${id}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        .then(res => {
+            if (!res.ok) throw new Error("Delete failed: " + res.status);
+            load();
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Error deleting user.");
+        });
+    }
+
+    // ================= CLEAR FORM =================
+    function clearForm() {
+        document.getElementById("id").value = "";
+        document.getElementById("username").value = "";
+        document.getElementById("fullname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("faculty").value = "";
+        document.getElementById("batch").value = "";
+        document.getElementById("degree").value = "";
+        document.getElementById("role").value = "ROLE_USER";
+    }
+
+    // ================= CLOSE MODAL =================
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+
+    // ================= LOGOUT =================
+    function logout() {
+        fetch("http://localhost:8080/logout", {
+            method: "POST",
+            credentials: "include"
+        }).then(() => {
+            window.location.href = "../login/login.html";
+        });
+    }
+
+    // ================= INIT =================
+    document.addEventListener("DOMContentLoaded", function () {
+        load();
+    });
+</script>
+
+
+</body>
+</html>

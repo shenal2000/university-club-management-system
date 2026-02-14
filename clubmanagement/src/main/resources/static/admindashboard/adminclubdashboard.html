@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Club Management</title>
+    <style>
+        body { font-family: 'Inter', Arial, sans-serif; background: #f5f6fa; margin: 0; color: #1f2937; }
+        .container { display: flex; height: 100vh; }
+
+
+        .sidebar {
+    width: 230px;
+    background: #0f172a;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* Push logout to bottom */
+.logout-btn {
+    margin-top: auto;
+    background: #dc2626;
+    color: white !important;
+}
+
+.logout-btn:hover {
+    background: #b91c1c !important;
+}
+
+
+        /* ================= MAIN CONTENT ================= */
+        .main { flex:1; padding:25px; overflow-y:auto; background:#f5f6fa; }
+        .actions { display:flex; justify-content:space-between; margin-bottom:15px; flex-wrap:wrap; }
+        .actions input { padding:10px 12px; width:320px; border:1px solid #cbd5e1; border-radius:8px; outline:none; font-size:14px; transition:all 0.2s ease; }
+        .actions input:focus { border-color:#2563eb; box-shadow:0 0 4px rgba(37,99,235,0.3); }
+        .actions button { padding:10px 16px; background:#2563eb; color:#fff; border:none; border-radius:8px; font-weight:500; cursor:pointer; transition:background 0.2s ease; }
+        .actions button:hover { background:#1e40af; }
+
+        /* ================= TABLE ================= */
+        table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.05); margin-bottom:30px; }
+        th, td { padding:12px 10px; border-bottom:1px solid #e5e7eb; font-size:14px; text-align:left; }
+        th { background:#f9fafb; font-weight:600; }
+        tr:hover { background:#f1f5f9; transition:background 0.2s ease; }
+        button.edit { background:#22c55e; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+        button.del { background:#ef4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+        button.edit:hover { background:#16a34a; }
+        button.del:hover { background:#b91c1c; }
+
+        /* ================= MODAL ================= */
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
+        .box { background:#fff; padding:25px; width:520px; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.15); animation:fadeIn 0.3s ease; }
+        .box h3 { margin-bottom:15px; font-size:20px; color:#111827; }
+        .box input, .box select, .box textarea { width:100%; padding:10px 12px; margin:6px 0; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; transition:all 0.2s ease; }
+        .box input:focus, .box select:focus, .box textarea:focus { border-color:#2563eb; box-shadow:0 0 4px rgba(37,99,235,0.3); outline:none; }
+        .box button { padding:10px 16px; margin-top:10px; border-radius:8px; border:none; font-weight:500; cursor:pointer; transition:all 0.2s ease; }
+        .box button:first-of-type { background:#2563eb; color:#fff; margin-right:8px; }
+        .box button:first-of-type:hover { background:#1e40af; }
+        .box button:last-of-type { background:#e5e7eb; color:#1f2937; }
+        .box button:last-of-type:hover { background:#d1d5db; }
+
+        /* ================= ANIMATION ================= */
+        @keyframes fadeIn { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width:768px) {
+            .container { flex-direction:column; }
+            .sidebar { width:100%; flex-direction:row; overflow-x:auto; }
+            .sidebar a { flex:1; text-align:center; margin-bottom:0; }
+            .actions { flex-direction:column; gap:10px; }
+            .actions input { width:100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="sidebar">
+        <h2>Admin</h2>
+
+        <a href="admindashboard.html">
+            <i class="fa-solid fa-chart-pie"></i> Dashboard
+        </a>
+
+        <a href="adminclubdashboard.html">
+            <i class="fa-solid fa-building"></i> Clubs
+        </a>
+
+        <a href="adminuserdashboard.html">
+            <i class="fa-solid fa-user"></i> Users
+        </a>
+
+        <a href="admineventdashboard.html">
+            <i class="fa-solid fa-calendar-days"></i> Events
+        </a>
+
+        <a href="adminannouncementdashboard.html">
+            <i class="fa-solid fa-bullhorn"></i> Announcements
+        </a>
+
+        <a href="adminmemberdashboard.html">
+            <i class="fa-solid fa-users"></i> Members
+        </a>
+
+        <!-- Logout -->
+        <a href="#" class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+
+    <div class="main">
+        <h2>Club Management</h2>
+
+        <div class="actions">
+            <input id="search" placeholder="Search ID / Name / Category" onkeyup="searchClub()">
+            <button onclick="openAdd()">+ Add Club</button>
+        </div>
+
+        <!-- Main Club Table -->
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th><th>Name</th><th>Description</th><th>Logo</th><th>Category</th><th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="table"></tbody>
+        </table>
+
+        <h3>CLUBS BY CATEGORY</h3>
+        <div id="categoryTables"></div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="box">
+        <h3 id="title">Add Club</h3>
+        <input type="hidden" id="id">
+        <input id="clubName" placeholder="Club Name">
+        <textarea id="clubDescription" placeholder="Club Description" rows="4"></textarea>
+        <input id="clubLogo" placeholder="Club Logo URL">
+        <select id="clubCategory">
+            <option value="SPORTS">SPORTS</option>
+            <option value="RELIGION">RELIGION</option>
+            <option value="ACTIVITY_BASED">ACTIVITY BASED</option>
+            <option value="INTERNATIONAL">INTERNATIONAL</option>
+        </select>
+        <button onclick="save()">Save</button>
+        <button onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    const API="http://localhost:8080/clubs";
+    let clubs=[], edit=false;
+
+    // Load all clubs
+    function load(){
+        fetch(API).then(r=>r.json()).then(d=>{
+            clubs=d;
+            draw(d);
+            drawCategoryTables();
+        });
+    }
+
+    // Draw main table
+    function draw(data){
+        document.getElementById("table").innerHTML="";
+        data.forEach(c=>{
+            document.getElementById("table").innerHTML+=`
+            <tr>
+            <td>${c.clubId}</td><td>${c.clubName}</td><td>${c.clubDescription}</td>
+            <td>${c.clubLogo||""}</td><td>${c.clubCategory}</td>
+            <td>
+            <button class="edit" onclick="editClub(${c.clubId})">Edit</button>
+            <button class="del" onclick="del(${c.clubId})">Del</button>
+            </td>
+            </tr>`;
+        });
+    }
+
+    // Search
+    function searchClub(){
+        let q=document.getElementById("search").value.toLowerCase();
+        draw(clubs.filter(c =>
+            c.clubId.toString().includes(q) ||
+            c.clubName.toLowerCase().includes(q) ||
+            c.clubCategory.toLowerCase().includes(q)
+        ));
+    }
+
+    // Open Add Club Modal
+    function openAdd(){
+        edit=false;
+        document.getElementById("title").innerText="Add Club";
+        document.getElementById("modal").style.display="flex";
+        document.getElementById("id").value="";
+        document.getElementById("clubName").value="";
+        document.getElementById("clubDescription").value="";
+        document.getElementById("clubLogo").value="";
+        document.getElementById("clubCategory").value="SPORTS";
+    }
+
+    // Edit Club
+    function editClub(id){
+        fetch(`${API}/${id}`).then(r=>r.json()).then(c=>{
+            edit=true;
+            document.getElementById("modal").style.display="flex";
+            document.getElementById("title").innerText="Edit Club";
+            document.getElementById("id").value=c.clubId;
+            document.getElementById("clubName").value=c.clubName;
+            document.getElementById("clubDescription").value=c.clubDescription;
+            document.getElementById("clubLogo").value=c.clubLogo;
+            document.getElementById("clubCategory").value=c.clubCategory;
+        });
+    }
+
+    // Save Club
+    function save(){
+        let data={
+            clubName:document.getElementById("clubName").value,
+            clubDescription:document.getElementById("clubDescription").value,
+            clubLogo:document.getElementById("clubLogo").value,
+            clubCategory:document.getElementById("clubCategory").value
+        };
+        let idVal=document.getElementById("id").value;
+        let method=edit?"PUT":"POST";
+        let url=edit?`${API}/${idVal}`:API;
+        fetch(url,{method,headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
+        .then(()=>{ closeModal(); load(); })
+        .catch(err=>console.error(err));
+    }
+
+    // Delete Club
+    function del(id){
+        if(confirm("Delete club?"))
+            fetch(`${API}/${id}`,{method:"DELETE"}).then(load);
+    }
+
+    // Close Modal
+    function closeModal(){ document.getElementById("modal").style.display="none"; }
+
+    // Draw category tables
+    function drawCategoryTables(){
+        const categories=["SPORTS","RELIGION","ACTIVITY_BASED","INTERNATIONAL"];
+        let container=document.getElementById("categoryTables");
+        container.innerHTML="";
+        categories.forEach(cat=>{
+            const catClubs = clubs.filter(c=>c.clubCategory===cat);
+            let html=`<h4>${cat.replace("_"," ")} CLUBS</h4><table><thead>
+                <tr><th>ID</th><th>Name</th><th>Description</th><th>Logo</th><th>Action</th></tr></thead><tbody>`;
+            catClubs.forEach(c=>{
+                html+=`<tr>
+                <td>${c.clubId}</td><td>${c.clubName}</td><td>${c.clubDescription}</td>
+                <td>${c.clubLogo||""}</td>
+                <td>
+                <button class="edit" onclick="editClub(${c.clubId})">Edit</button>
+                <button class="del" onclick="del(${c.clubId})">Del</button>
+                </td>
+                </tr>`;
+            });
+            html+="</tbody></table>";
+            container.innerHTML+=html;
+        });
+    }
+
+    load();
+
+    // Auto highlight active page
+document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll(".sidebar a");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    links.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active");
+        }
+    });
+});
+
+// Logout function
+function logout() {
+    // Clear login data
+    localStorage.removeItem("loggedUser");
+    sessionStorage.clear();
+
+    // Redirect to login page
+    window.location.href = "../login/login.html";
+}
+
+</script>
+
+</body>
+</html>

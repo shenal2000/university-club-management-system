@@ -1,49 +1,52 @@
-package com.example.clubmanagement.Model;
+package com.example.clubmanagement.model;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "event")
+@Table(name = "events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_id")
     private Long eventId;
 
-    @Column(name = "club_id", nullable = false)
-    private Long clubId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "club_id", nullable = false)
+    private Club club;
 
-    @Column(name = "event_title", nullable = false)
+    @Column(nullable = false)
     private String eventTitle;
 
-    @Column(name = "event_description")
+    @Column(length = 1000)
     private String eventDescription;
 
-    @Column(name = "event_time")
-    private LocalTime eventTime;
-
-    @Column(name = "event_date")
+    @Column(nullable = false)
     private LocalDate eventDate;
 
-    @Column(name = "location")
-    private String location;
+    @Column(nullable = false)
+    private LocalTime eventTime;
 
-    public Long getClubId() {return clubId;}
-    public void setClubId(Long clubId) {this.clubId = clubId;}
-    public Long getEventId() {return eventId;}
-    public void setEventId(Long eventId) {this.eventId = eventId;}
-    public String getEventTitle() {return eventTitle;}
-    public void setEventTitle(String eventTitle) {this.eventTitle = eventTitle;}
-    public String getEventDescription() {return eventDescription;}
-    public void setEventDescription(String eventDescription) {this.eventDescription = eventDescription;}
-    public LocalTime getEventTime() {return eventTime;}
-    public void setEventTime(LocalTime eventTime) {this.eventTime = eventTime;}
-    public LocalDate getEventDate() {return eventDate;}
-    public void setEventDate(LocalDate eventDate) {this.eventDate = eventDate;}
-    public String getLocation() {return location;}
-    public void setLocation(String location) {this.location = location;}
+    private String eventLocation;
+
+    private boolean active = true;
+
+    // Getters and Setters
+    public Long getEventId() { return eventId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
+    public Club getClub() { return club; }
+    public void setClub(Club club) { this.club = club; }
+    public String getEventTitle() { return eventTitle; }
+    public void setEventTitle(String eventTitle) { this.eventTitle = eventTitle; }
+    public String getEventDescription() { return eventDescription; }
+    public void setEventDescription(String eventDescription) { this.eventDescription = eventDescription; }
+    public LocalDate getEventDate() { return eventDate; }
+    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
+    public LocalTime getEventTime() { return eventTime; }
+    public void setEventTime(LocalTime eventTime) { this.eventTime = eventTime; }
+    public String getEventLocation() { return eventLocation; }
+    public void setEventLocation(String eventLocation) { this.eventLocation = eventLocation; }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
-

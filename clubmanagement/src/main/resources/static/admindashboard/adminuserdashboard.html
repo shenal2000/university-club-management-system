@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - User Management</title>
+    <style>
+        body { font-family: Arial,sans-serif; background:#f5f6fa; margin:0; color:#1f2937; }
+        .container { display:flex; height:100vh; }
+        .sidebar { width:230px; background:#0f172a; color:#fff; padding:20px; display:flex; flex-direction:column; }
+        .sidebar h2 { margin-bottom:30px; font-weight:700; }
+        .sidebar a { display:flex; align-items:center; gap:12px; padding:12px 14px; color:#cbd5e1; text-decoration:none; border-radius:8px; margin-bottom:8px; font-weight:500; transition:0.2s; }
+        .sidebar a:hover, .sidebar a.active { background:#2563eb; color:#fff; }
+        .logout-btn { margin-top:auto; background:#dc2626; color:white!important; }
+        .logout-btn:hover { background:#b91c1c!important; }
+        .main { flex:1; padding:25px; overflow-y:auto; background:#f5f6fa; }
+        .actions { display:flex; justify-content:space-between; margin-bottom:15px; flex-wrap:wrap; }
+        .actions input { padding:10px 12px; width:320px; border:1px solid #cbd5e1; border-radius:8px; outline:none; font-size:14px; }
+        .actions input:focus { border-color:#2563eb; box-shadow:0 0 4px rgba(37,99,235,0.3); }
+        .actions button { padding:10px 16px; background:#2563eb; color:#fff; border:none; border-radius:8px; font-weight:500; cursor:pointer; }
+        .actions button:hover { background:#1e40af; }
+        table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+        th, td { padding:12px 10px; border-bottom:1px solid #e5e7eb; font-size:14px; text-align:left; }
+        th { background:#f9fafb; font-weight:600; }
+        tr:hover { background:#f1f5f9; }
+        button.edit { background:#22c55e; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+        button.del { background:#ef4444; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+        button.edit:hover { background:#16a34a; }
+        button.del:hover { background:#b91c1c; }
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:1000; }
+        .box { background:#fff; padding:25px; width:520px; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.15); }
+        .box h3 { margin-bottom:15px; font-size:20px; color:#111827; }
+        .box input, .box select { width:100%; padding:10px 12px; margin:6px 0; border-radius:8px; border:1px solid #cbd5e1; font-size:14px; }
+        .box button { padding:10px 16px; margin-top:10px; border-radius:8px; border:none; font-weight:500; cursor:pointer; }
+        .box button:first-of-type { background:#2563eb; color:#fff; margin-right:8px; }
+        .box button:first-of-type:hover { background:#1e40af; }
+        .box button:last-of-type { background:#e5e7eb; color:#1f2937; }
+        .box button:last-of-type:hover { background:#d1d5db; }
+        .pagination { display:flex; justify-content:center; align-items:center; gap:12px; margin-top:20px; padding:10px; background:#f9fafb; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); width:fit-content; margin-left:auto; margin-right:auto; }
+        .page-btn { padding:8px 16px; background-color:#2563eb; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:500; }
+        .page-btn:hover { background-color:#1e40af; }
+        .page-info { font-weight:500; color:#1f2937; min-width:80px; text-align:center; }
+        /* Export CSV Button */
+.export-btn {
+    padding: 10px 16px;
+    background-color: #2563eb;  /* same as other buttons */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.export-btn:hover {
+    background-color: #1e40af;
+    transform: scale(1.05);
+}
+
+.export-btn:active {
+    transform: scale(0.98);
+}
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Admin</h2>
+
+        <a href="admindashboard.html">
+            <i class="fa-solid fa-chart-pie"></i> Dashboard
+        </a>
+
+        <a href="adminclubdashboard.html">
+            <i class="fa-solid fa-building"></i> Clubs
+        </a>
+
+        <a href="adminuserdashboard.html">
+            <i class="fa-solid fa-user"></i> Users
+        </a>
+
+        <a href="admineventdashboard.html">
+            <i class="fa-solid fa-calendar-days"></i> Events
+        </a>
+
+        <a href="adminannouncementdashboard.html">
+            <i class="fa-solid fa-bullhorn"></i> Announcements
+        </a>
+
+        <a href="adminmemberdashboard.html">
+            <i class="fa-solid fa-users"></i> Members
+        </a>
+
+        <!-- Logout -->
+        <a href="#" class="logout-btn" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+    </div>
+
+    <div class="main">
+        <h2>User Management</h2>
+        <div class="actions">
+            <input id="search" placeholder="Search ID / Username / Full Name" onkeyup="searchUser()">
+            <button onclick="openAdd()">+ Add User</button>
+        </div>
+        <button class="export-btn" onclick="exportCSV()">Export CSV</button> <br>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th><th>Username</th><th>Full Name</th><th>Email</th>
+                <th>Phone</th><th>Age</th><th>Faculty</th>
+                <th>Batch</th><th>Degree</th><th>Role</th><th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="table"></tbody>
+        </table>
+        <div class="pagination">
+            <button id="prevBtn" class="page-btn">Previous</button>
+            <span id="pageInfo" class="page-info">Page 1</span>
+            <button id="nextBtn" class="page-btn">Next</button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="box">
+        <h3 id="title">Add User</h3>
+        <input type="hidden" id="id">
+        <input id="username" placeholder="Username">
+        <input id="fullname" placeholder="Full Name">
+        <input id="email" placeholder="Email">
+        <input id="password" placeholder="Password">
+        <input id="phone" placeholder="Phone">
+        <input id="age" placeholder="Age">
+        <input id="faculty" placeholder="Faculty">
+        <input id="batch" placeholder="Batch">
+        <input id="degree" placeholder="Degree">
+        <select id="role">
+            <option value="ROLE_USER">USER</option>
+            <option value="ROLE_ADMIN">ADMIN</option>
+        </select>
+        <button onclick="save()">Save</button>
+        <button onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    const API = "http://localhost:8080/users";
+    let users = [];
+    let filteredUsers = [];
+    let edit = false;
+    let currentPage = 0;
+    const pageSize = 5;
+
+    // --- Load all users ---
+    function load() {
+        fetch(API)
+        .then(res => res.json())
+        .then(data => {
+            users = data;
+            filteredUsers = [...users]; // copy for search
+            currentPage = 0;
+            drawPage();
+        })
+        .catch(err => console.error(err));
+    }
+
+    // --- Draw current page ---
+    function drawPage() {
+        const table = document.getElementById("table");
+        table.innerHTML = "";
+        const start = currentPage * pageSize;
+        const end = start + pageSize;
+        const pageUsers = filteredUsers.slice(start, end);
+        pageUsers.forEach(u => {
+            table.innerHTML += `<tr>
+                <td>${u.userId}</td><td>${u.username}</td><td>${u.fullName}</td>
+                <td>${u.email}</td><td>${u.phone||""}</td><td>${u.age||""}</td>
+                <td>${u.faculty||""}</td><td>${u.batch||""}</td><td>${u.degree||""}</td>
+                <td>${u.roleGlobal}</td>
+                <td>
+                    <button class="edit" onclick="editUser(${u.userId})">Edit</button>
+                    <button class="del" onclick="del(${u.userId})">Del</button>
+                </td>
+            </tr>`;
+        });
+        const totalPages = Math.ceil(filteredUsers.length / pageSize) || 1;
+        document.getElementById("pageInfo").innerText = `Page ${currentPage+1} of ${totalPages}`;
+    }
+
+    // --- Pagination buttons ---
+    document.getElementById("prevBtn").addEventListener("click", ()=>{
+        if(currentPage>0){ currentPage--; drawPage(); }
+    });
+    document.getElementById("nextBtn").addEventListener("click", ()=>{
+        if((currentPage+1)*pageSize < filteredUsers.length){ currentPage++; drawPage(); }
+    });
+
+    // --- Open modal ---
+    function openAdd() {
+        edit=false;
+        document.getElementById("title").innerText="Add User";
+        document.getElementById("modal").style.display="flex";
+        document.getElementById("id").value="";
+        ["username","fullname","email","password","phone","age","faculty","batch","degree"].forEach(id => document.getElementById(id).value="");
+        document.getElementById("role").value="ROLE_USER";
+    }
+    function closeModal(){ document.getElementById("modal").style.display="none"; }
+
+    // --- Edit user ---
+    function editUser(id){
+        fetch(`${API}/${id}`)
+        .then(r=>r.json())
+        .then(u=>{
+            edit=true;
+            document.getElementById("modal").style.display="flex";
+            document.getElementById("title").innerText="Edit User";
+            document.getElementById("id").value=u.userId;
+            document.getElementById("username").value=u.username;
+            document.getElementById("fullname").value=u.fullName;
+            document.getElementById("email").value=u.email;
+            document.getElementById("password").value="";
+            document.getElementById("phone").value=u.phone;
+            document.getElementById("age").value=u.age;
+            document.getElementById("faculty").value=u.faculty;
+            document.getElementById("batch").value=u.batch;
+            document.getElementById("degree").value=u.degree;
+            document.getElementById("role").value=u.roleGlobal;
+        });
+    }
+
+    // --- Save / Update ---
+    function save(){
+        const id = document.getElementById("id").value;
+        const data = {
+            username: document.getElementById("username").value,
+            fullName: document.getElementById("fullname").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            phone: document.getElementById("phone").value,
+            age: document.getElementById("age").value ? parseInt(document.getElementById("age").value) : null,
+            faculty: document.getElementById("faculty").value,
+            batch: document.getElementById("batch").value,
+            degree: document.getElementById("degree").value,
+            roleGlobal: document.getElementById("role").value
+        };
+        const method = edit ? "PUT" : "POST";
+        const url = edit ? `${API}/${id}` : API;
+        fetch(url,{
+            method: method,
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(data)
+        }).then(res => res.ok ? load() : alert("Error saving user"))
+          .then(()=>closeModal())
+          .catch(err=>console.error(err));
+    }
+
+    // --- Delete ---
+    function del(id){
+        if(confirm("Delete user?")){
+            fetch(`${API}/${id}`,{method:"DELETE"})
+            .then(()=>load());
+        }
+    }
+
+    // --- Search ---
+    function searchUser(){
+        const q = document.getElementById("search").value.toLowerCase();
+        filteredUsers = users.filter(u =>
+            u.userId.toString().includes(q) ||
+            u.username.toLowerCase().includes(q) ||
+            u.fullName.toLowerCase().includes(q)
+        );
+        currentPage=0;
+        drawPage();
+    }
+
+    // --- Logout ---
+    function logout(){ localStorage.removeItem("loggedUser"); sessionStorage.clear(); window.location.href="../login/login.html"; }
+
+    // --- Initial load ---
+    load();
+
+    // --- Export CSV ---
+function exportCSV() {
+    if(filteredUsers.length === 0) {
+        alert("No users to export");
+        return;
+    }
+
+    // CSV headers
+    const headers = ["ID","Username","Full Name","Email","Phone","Age","Faculty","Batch","Degree","Role"];
+    const rows = filteredUsers.map(u => [
+        u.userId, u.username, u.fullName, u.email, u.phone||"", u.age||"", u.faculty||"", u.batch||"", u.degree||"", u.roleGlobal
+    ]);
+
+    // Combine headers + rows
+    let csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+
+    // Create blob and download
+    const blob = new Blob([csvContent], {type: "text/csv;charset=utf-8;"});
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "users_export.csv";
+    link.click();
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club management System</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+<style>
+    .club-category-section {
+    padding: 70px 20px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.club-category-section h2 {
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.category-card {
+    text-decoration: none;
+    color: #4b2cf7;
+    background-color: #fefefe;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.category-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.category-card span {
+    display: block;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+
+.category-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    transform: scale(1.02);
+    border-radius: 18px;
+}
+
+    @media (max-width: 992px) {
+    .category-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .category-container {
+        grid-template-columns: 1fr;
+    }
+
+    .category-card img {
+        height: 280px;
+    }
+}
+</style>
+</head>
+<body>
+<navbar-section>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nsbm.png" alt="NSBM Logo">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="club.html">Club</a>
+            <a href="login.html">Events</a>
+            <a href="login.html">Announcement</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div style="position: relative;">
+            <button id="loginBtn" class="login-btn">Login</button>
+            <div id="logoutMenu">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="club.html">Club</a>
+        <a href="login.html">Events</a>
+        <a href="login.html">Announcement</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+</navbar-section>
+
+<section class="club-category-section">
+    <h2>Club Categories</h2>
+
+    <div class="category-container">
+
+        <a href="../userdashboard/sportsclub.html" class="category-card">
+            <img src="images/sports.jpg" alt="Sports Clubs">
+            <span>Sports Clubs</span>
+        </a>
+
+        <a href="../userdashboard/religionclubs.html" class="category-card">
+            <img src="images/religion.jpg" alt="Religion Clubs">
+            <span>Religion Clubs</span>
+        </a>
+
+        <a href="../userdashboard/internationalclubs.html" class="category-card">
+            <img src="images/international.jpg" alt="International Clubs">
+            <span>International Clubs</span>
+        </a>
+
+        <a href="../userdashboard/activitybasedclubs.html" class="category-card">
+            <img src="images/activity.jpg" alt="Activity Based Clubs">
+            <span>Activity Based Clubs</span>
+        </a>
+
+    </div>
+</section>
+
+
+
+<script src="script.js"></script>
+<footer class="nsbm-footer">
+    <div class="footer-content">
+
+        <div class="footer-column branding-column">
+            <h3>NSBM Club Management System</h3>
+            <p>Empowering students at NSBM Green University <br>through clubs, learning, and <br>leadership opportunities.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column links-column">
+            <h3>Featured Links</h3>
+            <ul>
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Clubs</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-column">
+            <h3>Contact & Resources</h3>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="#">clubmanagement@nsbm.ac.lk</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+94 11 544 5000</span>
+            </div>
+            <ul>
+                <li><a href="https://www.nsbm.ac.lk/">NSBM Main Website</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; NSBM Club management System All Right Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

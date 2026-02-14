@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club management System</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .main-banner {
+            width: 100%;
+            height: 90vh;
+            background-image: url("background.jpg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .main-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            padding: 60px;
+            color: white;
+        }
+
+        .banner-content h1 {
+            font-size: 64px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .banner-content h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .browse-btn {
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            background-color: #1f8f3a;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .browse-btn:hover {
+            background-color: #166b2b;
+        }
+
+        .description-section {
+            background-color: #3ff3721e;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .description-section h2 {
+            font-size: 32px;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .description-section p {
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .club-category-section {
+            padding: 70px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .club-category-section h2 {
+            font-size: 32px;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            text-decoration: none;
+            color: #4b2cf7;
+            background-color: #fefefe;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.25s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .category-card span {
+            display: block;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+
+        .category-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: scale(1.02);
+            border-radius: 18px;
+        }
+
+        .latest-news-section {
+            padding: 70px 20px;
+            background-color: #3ff3721e;
+            text-align: center;
+        }
+
+        .latest-news-section h2 {
+            font-size: 32px;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background-color: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: box-shadow 0.25s ease;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-card h3 {
+            font-size: 18px;
+            margin: 15px 15px 8px;
+            color: #222;
+        }
+
+        .news-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin: 0 15px 20px;
+        }
+
+        .join-club-section {
+            padding: 80px 20px;
+            background-color: #f4fbf6;
+            text-align: center;
+        }
+
+        .join-club-section h2 {
+            font-size: 32px;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+        }
+
+        .club-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .club-card {
+            text-decoration: none;
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            transition: transform 0.25s ease;
+            color: #000;
+        }
+
+        .club-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .club-card span {
+            display: block;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .club-card:hover {
+            transform: scale(1.03);
+        }
+
+        /* Slider buttons */
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            font-size: 28px;
+            padding: 8px 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border-radius: 50%;
+        }
+
+        .slide-btn.left { left: -10px; }
+        .slide-btn.right { right: -10px; }
+
+        .gallery-section {
+            padding: 60px 8%;
+            background-color: #f9fdf9;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .gallery-grid {
+            column-count: 4;
+            column-gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            break-inside: avoid;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+
+        @media (max-width: 1100px) {
+            .gallery-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                column-count: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .club-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .club-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .news-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .news-container {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .category-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .category-container {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card img {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .main-banner {
+                height: 70vh;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .banner-content {
+                padding: 20px;
+            }
+
+            .banner-content h1 {
+                font-size: 36px;
+                letter-spacing: 1px;
+            }
+
+            .banner-content h2 {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .browse-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .description-section {
+                padding: 40px 15px;
+            }
+
+            .description-section h2 {
+                font-size: 24px;
+            }
+
+            .description-section p {
+                font-size: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<navbar-section>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nsbm.png" alt="NSBM Logo">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="club.html">Club</a>
+            <a href="login.html">Events</a>
+            <a href="login.html">Announcement</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div style="position: relative;">
+            <button id="loginBtn" class="login-btn">Login</button>
+            <div id="logoutMenu">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="club.html">Club</a>
+        <a href="login.html">Events</a>
+        <a href="login.html">Announcement</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+
+
+</navbar-section>
+
+<section class="main-banner">
+    <div class="banner-content">
+        <h1>CLUB MANAGEMENT</h1>
+        <h2>NSBM GREEN UNIVERSITY</h2>
+        <button class="browse-btn" onclick="goToClubs()">Browse Clubs</button>
+
+    </div>
+</section>
+
+<section class="description-section">
+    <h2>About the Club Management System</h2>
+    <p>
+        The Club Management System is designed to make student club activities
+        easier, more organized, and more accessible. It allows students to
+        discover clubs, stay updated with events, and engage in university life
+        through a single digital platform.
+    </p>
+    <p>
+        By connecting students, club leaders, and administrators, the system
+        helps improve communication, reduce paperwork, and encourage active
+        participation in clubs at NSBM Green University.
+    </p>
+</section>
+
+<section class="club-category-section">
+    <h2>Club Categories</h2>
+
+    <div class="category-container">
+
+        <a href="../userdashboard/sportsclub.html" class="category-card">
+            <img src="images/sports.jpg" alt="Sports Clubs">
+            <span>Sports Clubs</span>
+        </a>
+
+        <a href="../userdashboard/religionclubs.html" class="category-card">
+            <img src="images/religion.jpg" alt="Religion Clubs">
+            <span>Religion Clubs</span>
+        </a>
+
+        <a href="../userdashboard/internationalclubs.html" class="category-card">
+            <img src="images/international.jpg" alt="International Clubs">
+            <span>International Clubs</span>
+        </a>
+
+        <a href="../userdashboard/activitybasedclubs.html" class="category-card">
+            <img src="images/activity.jpg" alt="Activity Based Clubs">
+            <span>Activity Based Clubs</span>
+        </a>
+
+    </div>
+</section>
+
+<section class="latest-news-section">
+    <h2>Latest News</h2>
+
+    <div class="news-container">
+
+        <div class="news-card">
+            <img src="images/news1.jpg" alt="Club Event">
+            <h3>Inter-Club Sports Meet 2025</h3>
+            <p>
+                NSBM clubs are coming together for an exciting inter-club
+                sports meet. Students are invited to participate and support
+                their teams.
+            </p>
+        </div>
+
+        <div class="news-card">
+            <img src="images/news2.jpg" alt="New Club">
+            <h3>New International Club Launched</h3>
+            <p>
+                A new international student club has been launched to promote
+                cultural exchange and global collaboration among students.
+            </p>
+        </div>
+
+        <div class="news-card">
+            <img src="images/news3.jpg" alt="Workshop">
+            <h3>Leadership Workshop for Club Members</h3>
+            <p>
+                A leadership development workshop will be held to help club
+                members improve teamwork, communication, and management skills.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="join-club-section">
+    <h2>Join a Club</h2>
+
+    <div class="slider-wrapper">
+        <button class="slide-btn left" onclick="moveSlide(-1)">‹</button>
+
+        <div class="slider" id="clubSlider">
+
+            <!-- PAGE 1 -->
+            <div class="slide">
+                <div class="club-grid">
+                    <a href="login.html" class="club-card"><img src="images/sports.jpg"><span>Football Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/activity.jpg"><span>Cricket Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/international.jpg"><span>Basketball Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/sports.jpg"><span>Badminton Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/activity.jpg"><span>Chess Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/international.jpg"><span>Swimming Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/religion.jpg"><span>Drama Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/sports.jpg"><span>Music Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/religion.jpg"><span>Dance Club</span></a>
+                </div>
+            </div>
+
+            <!-- PAGE 2 -->
+            <div class="slide">
+                <div class="club-grid">
+                    <a href="login.html" class="club-card"><img src="images/club10.jpg"><span>IEEE Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club11.jpg"><span>ICT Society</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club12.jpg"><span>Robotics Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club13.jpg"><span>AI Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club14.jpg"><span>Photography Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club15.jpg"><span>Film Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club16.jpg"><span>Environmental Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club17.jpg"><span>Leo Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club18.jpg"><span>Rotaract Club</span></a>
+                </div>
+            </div>
+
+            <!-- PAGE 3 -->
+            <div class="slide">
+                <div class="club-grid">
+                    <a href="login.html" class="club-card"><img src="images/club19.jpg"><span>Islamic Society</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club20.jpg"><span>Buddhist Society</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club21.jpg"><span>Christian Society</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club22.jpg"><span>Hindu Society</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club23.jpg"><span>International Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club24.jpg"><span>Language Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club25.jpg"><span>Entrepreneur Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club26.jpg"><span>Marketing Club</span></a>
+                    <a href="login.html" class="club-card"><img src="images/club27.jpg"><span>Startup Hub</span></a>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="slide-btn right" onclick="moveSlide(1)">›</button>
+    </div>
+</section>
+
+<section class="gallery-section">
+    <h2 class="section-title">Gallery</h2>
+
+    <div class="gallery-grid">
+        <img src="images/news1.jpg" alt="Club Activity">
+        <img src="images/sports.jpg" alt="Club Activity">
+        <img src="images/activity.jpg" alt="Club Activity">
+        <img src="images/international.jpg" alt="Club Activity">
+        <img src="images/news2.jpg" alt="Club Activity">
+        <img src="images/news3.jpg" alt="Club Activity">
+        <img src="images/religion.jpg" alt="Club Activity">
+        <img src="images/sports.jpg" alt="Club Activity">
+        <img src="images/sports.jpg" alt="Club Activity">
+        <img src="images/sports.jpg" alt="Club Activity">
+    </div>
+</section>
+
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const clubCards = document.querySelectorAll(".club-card");
+
+    clubCards.forEach(card => {
+        // Get the club name (or you can add a data attribute like data-club-id)
+        const clubName = card.querySelector("span").textContent;
+
+        // Replace static href with dynamic link to club-details page
+        card.href = `club-details.html?id=${encodeURIComponent(clubName)}`;
+
+        // Optional: if user is not logged in, redirect to login
+        if (!loggedUser) {
+            card.href = "login.html";
+        }
+    });
+});
+
+    function goToClubs() {
+        window.location.href = "club.html";
+    }
+    let currentSlide = 0;
+
+    function moveSlide(direction) {
+        const slider = document.getElementById("clubSlider");
+        const totalSlides = slider.children.length;
+
+        currentSlide += direction;
+
+        if (currentSlide < 0) currentSlide = totalSlides - 1;
+        if (currentSlide >= totalSlides) currentSlide = 0;
+
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+</script>
+
+<footer class="nsbm-footer">
+    <div class="footer-content">
+
+        <div class="footer-column branding-column">
+            <h3>NSBM Club Management System</h3>
+            <p>Empowering students at NSBM Green University <br>through clubs, learning, and <br>leadership opportunities.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column links-column">
+            <h3>Featured Links</h3>
+            <ul>
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Clubs</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-column">
+            <h3>Contact & Resources</h3>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="#">clubmanagement@nsbm.ac.lk</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+94 11 544 5000</span>
+            </div>
+            <ul>
+                <li><a href="https://www.nsbm.ac.lk/">NSBM Main Website</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; NSBM Club management System All Right Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

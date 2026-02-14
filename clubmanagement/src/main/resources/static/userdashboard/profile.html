@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club management System</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+.profile-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+           linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+           url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.profile-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 30px 40px;
+}
+
+/* Title */
+.profile-card h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #1e293b;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 20px;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Info Grid */
+.profile-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 40px;
+    margin-top: 20px;
+}
+
+.profile-info p {
+    font-size: 15px;
+    color: #374151;
+}
+
+.profile-info b {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+/* Buttons */
+.profile-actions {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.logout-btn {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-info {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+<navbar-section>
+    <div class="navbar">
+        <div class="logo">
+            <img src="nsbm.png" alt="NSBM Logo">
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+        </div>
+        <div class="menu">
+            <a href="index.html">Home</a>
+            <a href="club.html">Club</a>
+            <a href="events.html">Events</a>
+            <a href="announcement.html">Announcement</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="contactus.html">Contact Us</a>
+            <a href="faq.html">FAQ</a>
+        </div>
+        <div style="position: relative;">
+            <button id="loginBtn" class="login-btn">Login</button>
+            <div id="logoutMenu">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </div>
+
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="index.html">Home</a>
+        <a href="club.html">Club</a>
+        <a href="events.html">Events</a>
+        <a href="announcement.html">Announcement</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+        <a href="faq.html">FAQ</a>
+    </div>
+</navbar-section>
+<div class="profile-container">
+    <div class="profile-card">
+
+        <h2>User Profile</h2>
+
+        <div class="profile-header">
+            <div>
+                <div class="profile-name" id="fullName"></div>
+                <small id="email"></small>
+            </div>
+        </div>
+
+        <div class="profile-info">
+            <p><b>Username</b><span id="username"></span></p>
+            <p><b>Phone</b><span id="phone"></span></p>
+            <p><b>Faculty</b><span id="faculty"></span></p>
+            <p><b>Degree</b><span id="degree"></span></p>
+            <p><b>Batch</b><span id="batch"></span></p>
+        </div>
+
+        <div class="profile-actions">
+
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const user = JSON.parse(localStorage.getItem("loggedUser"));
+        if (!user) {
+            // If not logged in, redirect to login page
+            window.location.href = "../login/login.html";
+            return;
+        }
+
+        // Set profile info
+        document.getElementById("fullName").textContent = user.fullName;
+        document.getElementById("username").textContent = user.username;
+        document.getElementById("email").textContent = user.email;
+        document.getElementById("phone").textContent = user.phone || "-";
+        document.getElementById("faculty").textContent = user.faculty || "-";
+        document.getElementById("degree").textContent = user.degree || "-";
+        document.getElementById("batch").textContent = user.batch || "-";
+        // Add role if you have element for it
+    });
+
+    // Global logout function
+    function logout() {
+        localStorage.removeItem("loggedUser");
+        window.location.href = "../login/login.html";
+    }
+</script>
+
+<script src="script.js"></script>
+<footer class="nsbm-footer">
+    <div class="footer-content">
+
+        <div class="footer-column branding-column">
+            <h3>NSBM Club Management System</h3>
+            <p>Empowering students at NSBM Green University <br>through clubs, learning, and <br>leadership opportunities.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column links-column">
+            <h3>Featured Links</h3>
+            <ul>
+                <li><a href="#">My profile</a></li>
+                <li><a href="#">Clubs</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Announcements</a></li>
+                <li><a href="#">Privacy policy</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-column">
+            <h3>Contact & Resources</h3>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="#">clubmanagement@nsbm.ac.lk</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+94 11 544 5000</span>
+            </div>
+            <ul>
+                <li><a href="https://www.nsbm.ac.lk/">NSBM Main Website</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; NSBM Club management System All Right Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
