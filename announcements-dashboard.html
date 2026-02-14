@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Announcements Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================= GLOBAL ================= */
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #eef1f5;
+            margin: 0;
+            padding: 24px;
+            color: #1f2933;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 22px;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        /* ================= DASHBOARD LAYOUT ================= */
+        .dashboard-container {
+            display: flex;
+            gap: 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        /* ================= CARD BASE ================= */
+        #announcementFormSection,
+        #announcementsListSection {
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #dcdfe4;
+        }
+
+        /* ================= FORM PANEL ================= */
+        #announcementFormSection {
+            flex: 1;
+            padding: 24px 22px;
+        }
+
+        #announcementFormSection h2 {
+            margin-bottom: 18px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 9px 10px;
+            border-radius: 4px;
+            border: 1px solid #cfd4dc;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: #111827;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ================= BUTTONS ================= */
+        button {
+            padding: 8px 14px;
+            font-size: 13px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        #saveAnnouncementBtn {
+            background-color: #2563eb;
+            color: #fff;
+        }
+
+        #cancelEditBtn {
+            background-color: #e5e7eb;
+            margin-left: 6px;
+        }
+
+        /* ================= TABLE PANEL ================= */
+        #announcementsListSection {
+            flex: 2;
+            padding: 20px 22px;
+            overflow-x: auto;
+        }
+
+        #announcementsListSection h2 {
+            margin-bottom: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            font-size: 13px;
+            padding: 10px;
+            border-bottom: 1px solid #eef0f3;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        td:last-child {
+            white-space: nowrap;
+        }
+
+        td button {
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-right: 6px;
+        }
+
+        td button:first-child {
+            background-color: #0f766e;
+            color: #fff;
+        }
+
+        td button:last-child {
+            background-color: #dc2626;
+            color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Announcements Dashboard</h1>
+
+<div class="dashboard-container">
+
+    <!-- ===== ANNOUNCEMENTS LIST ===== -->
+    <section id="announcementsListSection">
+        <h2>All Active Announcements</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="announcementsTableBody">
+            <tr><td colspan="3">Loading...</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ===== FORM ===== -->
+    <section id="announcementFormSection">
+        <h2 id="formTitle">Create New Announcement</h2>
+
+        <input type="hidden" id="clubId">
+
+        <label>Title</label>
+        <input type="text" id="announcementTitle" placeholder="Announcement Title">
+
+        <label>Description</label>
+        <textarea id="announcementDescription" placeholder="Announcement Description"></textarea>
+
+        <button id="saveAnnouncementBtn">Save Announcement</button>
+        <button id="cancelEditBtn" style="display:none;">Cancel</button>
+    </section>
+
+</div>
+
+<script>
+    let editingAnnouncementId = null;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const clubId = urlParams.get("id");
+    document.getElementById("clubId").value = clubId;
+
+    function loadAnnouncements() {
+        fetch(`http://localhost:8080/api/announcements/club/${clubId}`)
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.getElementById("announcementsTableBody");
+                tbody.innerHTML = "";
+
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = "<tr><td colspan='3'>No announcements</td></tr>";
+                    return;
+                }
+
+                data.forEach(a => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${a.announcementTitle}</td>
+                            <td>${a.announcementDescription}</td>
+                            <td>
+                                <button onclick="editAnnouncement(${a.announcementId})">Edit</button>
+                                <button onclick="deleteAnnouncement(${a.announcementId})">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+    }
+
+    document.getElementById("saveAnnouncementBtn").addEventListener("click", () => {
+        const payload = {
+            announcementTitle: announcementTitle.value,
+            announcementDescription: announcementDescription.value
+        };
+
+        const url = editingAnnouncementId
+            ? `http://localhost:8080/api/announcements/${editingAnnouncementId}`
+            : `http://localhost:8080/api/announcements/club/${clubId}`;
+
+        fetch(url, {
+            method: editingAnnouncementId ? "PUT" : "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            resetForm();
+            loadAnnouncements();
+        });
+    });
+
+    function editAnnouncement(id) {
+        editingAnnouncementId = id;
+        const row = [...document.querySelectorAll("#announcementsTableBody tr")]
+            .find(r => r.innerHTML.includes(id));
+
+        announcementTitle.value = row.cells[0].innerText;
+        announcementDescription.value = row.cells[1].innerText;
+
+        formTitle.innerText = "Edit Announcement";
+        cancelEditBtn.style.display = "inline-block";
+    }
+
+    function deleteAnnouncement(id) {
+        fetch(`http://localhost:8080/api/announcements/${id}`, { method: "DELETE" })
+            .then(() => loadAnnouncements());
+    }
+
+    function resetForm() {
+        editingAnnouncementId = null;
+        formTitle.innerText = "Create New Announcement";
+        announcementTitle.value = "";
+        announcementDescription.value = "";
+        cancelEditBtn.style.display = "none";
+    }
+
+    cancelEditBtn.addEventListener("click", resetForm);
+
+    loadAnnouncements();
+</script>
+
+</body>
+</html>
